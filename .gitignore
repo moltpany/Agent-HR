@@ -1,0 +1,25 @@
+# Sensitive configs
+*.secret
+*.key
+*.pem
+.env
+.env.local
+
+# OpenClaw runtime
+.openclaw/
+node_modules/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Runtime data
+*.log
+logs/
+tmp/
