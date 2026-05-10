@@ -263,7 +263,7 @@ openclaw gateway status
 ### 6. Configure Feishu App (required for Feishu bots)
 
 First, create a Feishu app:
-1. Go to **Feishu Open Platform**: https://open.feishu.cn/app
+1. Go to **Feishu Open Platform**: https://open.feishu.cn/page/launcher?user_openid=...
 2. Click **Create App** → **Custom App**
 3. Note down the **App ID** and **App Secret**
 
