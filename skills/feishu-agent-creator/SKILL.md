@@ -9,14 +9,24 @@ Guide for bringing a new agent into an OpenClaw deployment.
 
 ## Workflow Overview
 
-### Pre-Flight: Agent Search & Talent Discovery 🔍
+### Phase 0: Understand User Expectations 🎯
+Before searching or building, deeply understand what the user wants:
+1. **Agent's job** — What tasks should it handle?
+2. **Personality preference** — Professional? Playful? Quirky? Deadpan?
+3. **Target audience** — Who will chat with this agent?
+4. **Skills needed** — Calendar? Documents? Data? Web search?
+5. **Inspiration** — Any characters, roles, or existing agents they admire?
+
+Guide the user to articulate their vision. The clearer the expectation, the better the search results and final agent.
+
+### Phase 1: Agent Search & Talent Discovery 🔍
 Before building from scratch, scout the global agent marketplace:
 1. **Search GitHub** — Look for existing agent personalities (e.g., agency-agents)
 2. **Search ClawHub** — Check OpenClaw's skill registry
 3. **Check Internal Roster** — Avoid duplicating existing agents
 4. **Assess Match** — Determine: reuse / adapt / build-new
 
-### Main Flow: Onboarding
+### Phase 2: Onboarding
 5. **Collect Application Info** — Gather credentials and preferences from the sponsor
 6. **Register in Config** — Add the agent to OpenClaw's configuration files
 7. **Create Workspace** — Set up the agent's working directory with core files
@@ -27,7 +37,57 @@ Before building from scratch, scout the global agent marketplace:
 
 ## Step-by-Step
 
-### 0. Agent Search & Talent Discovery (Optional but Recommended)
+### 0. Understand User Expectations (CRITICAL — Do This First)
+
+Before searching GitHub or writing any code, you MUST understand what the user actually wants. Ask guiding questions:
+
+#### 0.1 The Expectation Interview
+
+Ask the user to describe their ideal agent:
+
+| Question | Why It Matters | Example Answers |
+|----------|---------------|-----------------|
+| **"这个 agent 主要负责什么工作？"** | Determines core skills | "帮我记录拍鸟照片" / "管理项目进度" / "回答客服问题" |
+| **"你希望它是什么性格？"** | Guides personality design | "温暖亲切" / "毒舌吐槽" / "严谨专业" / "幽默风趣" |
+| **"有没有喜欢的角色/形象作为参考？"** | Inspiration for identity | "像钢铁侠那样靠谱" / "像哆啦A梦" / "像一位老教授" |
+| **"谁会跟这个 agent 聊天？"** | Defines audience and tone | "我自己用" / "团队成员" / "客户" / "我和朋友奇奇" |
+| **"它需要操作哪些工具？"** | Determines skill requirements | "飞书日历" / "查看文档" / "搜索网页" / "记录数据" |
+| **"有没有现有 agent 你觉得不错的？"** | Reference for quality bar | "我觉得 HR agent 那样的就很好" |
+
+#### 0.2 Document the Vision
+
+After the interview, write a brief "Agent Design Brief":
+```markdown
+# Agent Design Brief: [Name]
+
+## Role
+[What it does]
+
+## Personality
+[Character traits, vibe, emoji]
+
+## Audience
+[Who chats with it]
+
+## Skills Needed
+[List of skills/tools]
+
+## Inspiration
+[Characters, existing agents, or archetypes]
+
+## Success Criteria
+[How do we know it's working?]
+```
+
+#### 0.3 Search with Purpose
+
+Now that you know what the user wants, search with specific keywords:
+- Instead of "find an agent" → "find a bird photography assistant agent"
+- Instead of "search GitHub" → "search for wildlife/nature documentation skills"
+
+---
+
+### 1. Agent Search & Talent Discovery (Optional but Recommended)
 
 Before creating a new agent from scratch, search for existing agent templates, skills, and implementations that might already solve the problem. This avoids reinventing the wheel and leverages battle-tested agent personalities.
 
@@ -202,8 +262,12 @@ openclaw gateway status
 
 ### 6. Configure Feishu App (required for Feishu bots)
 
-Go to [Feishu Open Platform](https://open.feishu.cn/app) and find your app:
+First, create a Feishu app:
+1. Go to **Feishu Open Platform**: https://open.feishu.cn/app
+2. Click **Create App** → **Custom App**
+3. Note down the **App ID** and **App Secret**
 
+Then configure the app:
 1. **Event Subscription** → Select "Use long connection to receive events" → Add event `im.message.receive_v1`
 2. **Permission Management** → Import required permissions (see feishu-permissions.md)
 3. **App Capability > Bot** → Enable bot capability

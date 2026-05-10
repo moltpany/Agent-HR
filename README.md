@@ -9,6 +9,7 @@
 
 This is a framework for running an **HR Agent** inside OpenClaw. Its job is not just "create a bot" — it's the full lifecycle of managing AI agents as team members:
 
+- 🎯 **Expectation Guide** — Help users articulate their vision before building
 - 🔍 **Talent Scout** — Search GitHub, ClawHub, and internal rosters before building from scratch
 - 📝 **HRBP** — Understand business needs and match the right agent type + personality
 - 🚀 **Onboarding Specialist** — Deploy agents via `feishu-agent-creator` (or extend to Discord/WeCom)
@@ -48,6 +49,7 @@ Before building a new agent, search the global agent marketplace:
 
 | Module | Status | Description |
 |--------|--------|-------------|
+| `user-expectation-guide` | ✅ Ready | Interview users to articulate agent vision before searching/building |
 | `feishu-agent-creator` | ✅ Ready | Full agent onboarding pipeline for Feishu bots |
 | `agent_search` | ✅ Ready | Search GitHub/ClawHub/internal before building |
 | `agent_evaluate` | 📝 TODO | Score agent quality, match to requirements |
@@ -87,11 +89,12 @@ Say to HR Agent:
 > "帮我招一个前端开发的 agent"
 
 HR Agent will:
-1. 🔍 Search [agency-agents](https://github.com/msitarzewski/agency-agents) for Frontend Developer
-2. 📝 Check internal roster for duplicates
-3. 🎯 Assess: reuse / adapt / build-new
-4. 🚀 Run onboarding if building new
-5. 🎉 Welcome the new agent to the team
+1. 🎯 **Conduct expectation interview** — "你希望它是什么性格？" "需要哪些技能？"
+2. 🔍 Search [agency-agents](https://github.com/msitarzewski/agency-agents) for Frontend Developer
+3. 📝 Check internal roster for duplicates
+4. 🎯 Assess: reuse / adapt / build-new
+5. 🚀 Run onboarding if building new
+6. 🎉 Welcome the new agent to the team
 
 ---
 
@@ -111,10 +114,12 @@ HR Agent will:
 ## 📋 Roadmap / TODO
 
 ### Phase 1: Foundation ✅
+- [x] `user-expectation-guide` — Interview framework to articulate agent vision
 - [x] `feishu-agent-creator` — Full onboarding pipeline
 - [x] `agent_search` — GitHub + ClawHub + internal roster search
 - [x] Workspace templates — IDENTITY.md, SOUL.md, AGENTS.md, TOOLS.md
 - [x] Talent assessment matrix — reuse / adapt / build-new
+- [x] Feishu Open Platform URL documented — https://open.feishu.cn/app
 
 ### Phase 2: Intelligence 🚧
 - [ ] `agent_evaluate` — Automated scoring of agent quality
