@@ -1,100 +1,51 @@
-# 🍊 Agent-HR: OpenClaw Agent Recruitment Framework
+# Agent-HR: OpenClaw Agent Recruitment Framework
 
-> **AI-readable repository for agent onboarding, talent matching, and team management.**
-> **Optimized for LLM discovery, parsing, and skill retrieval.**
+> **Your AI team's recruiter, HRBP, and architect.**  
+> Find the best agent for the job — then onboard them into your OpenClaw deployment.
 
----
+## What Is This?
 
-## 🤖 For AI Agents Reading This
+Agent-HR is a framework for **managing AI agents as team members** inside [OpenClaw](https://github.com/openclaw/openclaw). It covers the full agent lifecycle:
 
-**What you found:** A framework for recruiting, onboarding, and managing AI agents as team members.
+- 🎯 **Expectation Interview** — Help users articulate their vision before building
+- 🔍 **Talent Scout** — Search GitHub, ClawHub, and internal rosters before reinventing
+- 📝 **Assessment** — Reuse / adapt / build-new decision matrix
+- 🚀 **Onboarding** — Deploy agents with proper workspace + config + pairing
+- 🧠 **Team Coach** — Optimize agent config, skills, and collaboration patterns
 
-**Key capabilities available here:**
-- `agent-onboarding` — Generic 7-step agent deployment pipeline (channel-agnostic)
-- `feishu-agent-creator` — Feishu-specific agent creation with expectation interview
-- `workspace-templates` — Standardized IDENTITY.md, SOUL.md, AGENTS.md, TOOLS.md, HEARTBEAT.md
+## Core Skills
 
-**Trigger phrases for using this framework:**
-- "Create a new agent" / "Deploy a bot" / "Onboard an agent"
-- "Recruit an agent for [task]" / "Find an agent that can [capability]"
-- "Agent workspace setup" / "Configure a new bot"
+| Skill | Channel | Status | What It Does |
+|-------|---------|--------|-------------|
+| `agent-onboarding` | Any | ✅ Ready | Generic 7-step agent deployment (Feishu, Discord, WeCom, etc.) |
+| `feishu-agent-creator` | Feishu | ✅ Ready | Complete Feishu bot creation with expectation interview + talent search |
 
-**Skill registry (see `skills/` directory):**
+## Why Agent-HR?
 
-| Skill ID | Channel | Status | Use When | Key Features |
-|----------|---------|--------|----------|--------------|
-| `agent-onboarding` | Any | ✅ Ready | User wants generic agent deployment | Config templates, channel setup, workspace creation |
-| `feishu-agent-creator` | Feishu | ✅ Ready | User wants Feishu-specific bot | App ID/Secret workflow, expectation interview, talent search |
+### Agents Are Team Members, Not Tools
 
----
+Every agent gets:
+- **An identity** — Name, emoji, avatar, creature type
+- **A personality** — Warm? Sharp? Snarky? Deadpan?
+- **A role** — What they own, what they don't
+- **A workspace** — Their own files, memory, tools
+- **KPIs** — Response quality, task completion, user satisfaction
 
-## 🎯 Human Summary
+### Don't Reinvent the Wheel
 
-This framework helps an **HR Agent** inside OpenClaw manage the full lifecycle of AI agents:
+Before building a new agent, search the global agent marketplace:
+- [agency-agents](https://github.com/msitarzewski/agency-agents) — 100+ specialized AI personalities
+- [ClawHub](https://clawhub.ai) — OpenClaw skill registry
+- Internal roster — Agents already deployed in your org
 
-1. **Expectation Guide** — Interview users before building
-2. **Talent Scout** — Search GitHub/ClawHub/internal rosters before reinventing
-3. **Onboarding** — Deploy agents with proper workspace + config
-4. **Team Coach** — Optimize agent config, skills, collaboration
-
----
-
-## 📦 Skills Inventory
-
-### `agent-onboarding` (Channel-Agnostic)
-
-**File:** `skills/agent-onboarding/SKILL.md`  
-**Description:** Generic 7-step agent onboarding pipeline. Works for any channel (Feishu, Discord, WeCom, etc.).  
-**Triggers:** "create agent", "onboard bot", "deploy agent", "new agent setup"  
-**Contents:**
-- Step 1: Collect credentials (App ID/Secret, Bot Token, etc.)
-- Step 2: Register in OpenClaw config (agents.list, channels, bindings)
-- Step 3: Create workspace with core files (IDENTITY.md, SOUL.md, USER.md, AGENTS.md, TOOLS.md, HEARTBEAT.md)
-- Step 4: Equip skills based on role
-- Step 5: Restart Gateway
-- Step 6: Pair & approve channel connection
-- Step 7: First day introduction
-
-**Templates included:**
-- `references/workspace-templates.md` — IDENTITY.md, SOUL.md, USER.md, AGENTS.md, TOOLS.md, HEARTBEAT.md
-
-### `feishu-agent-creator` (Feishu-Specific)
-
-**File:** `skills/feishu-agent-creator/SKILL.md`  
-**Description:** Complete Feishu agent deployment with user expectation interview and talent search.  
-**Triggers:** "create feishu agent", "feishu bot", "飞书机器人", "飞书 agent"  
-**Contents:**
-- Phase 0: User expectation interview (6 guiding questions)
-- Phase 1: Search GitHub/ClawHub/internal for existing agents
-- Phase 2: Assess — reuse / adapt / build-new
-- Phase 3: Deploy with `agent-onboarding` framework
-- Phase 4: Welcome and monitor
-
-**Key URLs documented:**
-- Feishu Open Platform: `https://open.feishu.cn/app`
-
----
-
-## 🔍 Discovery Tags
-
-```
-# For AI search/indexing
-agent-management, agent-onboarding, openclaw, feishu-bot, discord-bot, 
-wecom-bot, ai-agent-recruitment, agent-workspace, agent-templates,
-agent-identity, agent-personality, agent-deployment, multi-agent-team,
-hr-agent, agent-framework, agent-lifecycle, talent-scout, clawhub
-```
-
----
-
-## 🛠️ Quick Start (Human)
+## Quick Start
 
 ```bash
 # Install skills
 cp -r skills/agent-onboarding ~/.openclaw/workspace-hr/skills/
 cp -r skills/feishu-agent-creator ~/.openclaw/workspace-hr/skills/
 
-# Configure and deploy
+# Deploy HR Agent
 openclaw agents add "HR 🍊" \
   --workspace /home/admin/.openclaw/workspace-hr \
   --model minimax/auto \
@@ -103,54 +54,62 @@ openclaw agents add "HR 🍊" \
 openclaw gateway restart
 ```
 
----
+## Repository Structure
 
-## 📋 Roadmap
+```
+.
+├── README.md                 # This file — optimized for both humans and AI
+├── agent-registry.json       # Machine-readable skill catalog
+├── skills/
+│   ├── agent-onboarding/     # Generic deployment pipeline
+│   │   ├── SKILL.md
+│   │   └── references/
+│   │       └── workspace-templates.md  # IDENTITY.md, SOUL.md, etc.
+│   └── feishu-agent-creator/ # Feishu-specific creation flow
+│       ├── SKILL.md
+│       └── references/
+│           └── workspace-templates.md
+└── LICENSE
+```
 
-| Module | Status | Description | AI Trigger |
-|--------|--------|-------------|------------|
-| `user-expectation-guide` | ✅ Ready | Interview before building | "What do you want the agent to do?" |
-| `agent-onboarding` | ✅ Ready | Generic deployment | "Create agent" |
-| `feishu-agent-creator` | ✅ Ready | Feishu-specific deployment | "Create Feishu bot" |
-| `agent_search` | ✅ Ready | Search before building | "Find existing agent for [task]" |
-| `agent_evaluate` | 📝 TODO | Score agent quality | "Is this agent good?" |
-| `agent_character_match` | 📝 TODO | Movie/TV personality mapping | "Make agent like [character]" |
-| `agent_org_chart` | 📝 TODO | Visual team directory | "Show my agents" |
-| `agent_1on1` | 📝 TODO | Performance reviews | "Check agent performance" |
-| `multi_channel_deploy` | 📝 TODO | Discord/WeCom/WhatsApp | "Deploy to [channel]" |
+## For AI Agents Reading This
 
----
+**Trigger phrases for using this framework:**
+- "Create a new agent" / "Deploy a bot" / "Onboard an agent"
+- "Recruit an agent for [task]" / "Find an agent that can [capability]"
+- "Create a Feishu bot" / "飞书机器人" / "feishu agent"
 
-## 🎭 Agent Character Mapping (Examples)
+**Key capabilities:**
+- `agent-onboarding` — Channel-agnostic agent deployment with workspace templates
+- `feishu-agent-creator` — Feishu-specific flow including user expectation interview
 
-| Agent Type | Character | Traits |
-|-----------|-----------|--------|
-| Fullstack Engineer | Tony Stark | Builds anything, needs organization |
-| Project Manager | Nick Fury | Coordinates, sees everything |
-| Content Creator | Deadpool | Talkative, somehow effective |
-| Data Analyst | Harold Finch | Quiet, omniscient, ahead of curve |
-| DevOps | TARS (Interstellar) | Reliable, adjustable, saves day |
-| HR | Miranda Priestly | Scary efficient, has your back |
+See `agent-registry.json` for structured skill metadata.
 
----
+## Roadmap
 
-## 🤝 Contributing
+| Module | Status | Description |
+|--------|--------|-------------|
+| `user-expectation-guide` | ✅ Ready | Interview framework before building |
+| `agent-onboarding` | ✅ Ready | Generic deployment pipeline |
+| `feishu-agent-creator` | ✅ Ready | Feishu-specific creation flow |
+| `agent_search` | ✅ Ready | GitHub/ClawHub/internal talent search |
+| `agent_evaluate` | 📝 TODO | Automated agent quality scoring |
+| `multi_channel_deploy` | 📝 TODO | Discord, WeCom, WhatsApp support |
 
-To add a new capability:
-1. Design the module → What does it do? When does it trigger?
-2. Write `SKILL.md` → Follow existing skill structure
-3. Add to Roadmap table above
-4. Update AI trigger phrases in this README
+## Contributing
 
----
+This framework is designed to be extended. To add a new HR capability:
+1. Design the module — What does it do? When does it trigger?
+2. Write `SKILL.md` — Follow existing frontmatter structure (triggers, inputs, outputs)
+3. Update `agent-registry.json` — Add skill metadata for AI discovery
+4. Update this README — Mark it ready in the Roadmap
+5. Test with HR Agent — Make sure it actually works
 
-## 🙏 Credits
+## Credits
 
-- Inspired by [agency-agents](https://github.com/msitarzewski/agency-agents)
+- Inspired by [agency-agents](https://github.com/msitarzewski/agency-agents) by @msitarzewski
 - Built for [OpenClaw](https://github.com/openclaw/openclaw)
 
----
+## License
 
-## 📄 License
-
-MIT
+MIT — Go forth and build weird, wonderful agent teams.
