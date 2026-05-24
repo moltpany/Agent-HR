@@ -1,6 +1,43 @@
 ---
 name: feishu-agent-creator
-description: Create and deploy a new Feishu bot agent in OpenClaw. Use when creating, registering, or deploying a new Feishu agent with its own workspace, app credentials, and configuration. Covers the full lifecycle from collecting Feishu app credentials to pairing approval. Includes agent talent search — scout existing agent templates and skills before building from scratch. Triggers on phrases like "create a feishu agent", "deploy a feishu bot", "register feishu agent", "add a new feishu bot", "onboard a feishu agent", "find an agent for".
+description: |
+  Create and deploy a new Feishu bot agent in OpenClaw. Use when creating, 
+  registering, or deploying a new Feishu agent with its own workspace, 
+  app credentials, and configuration. Includes user expectation interview 
+  and talent search (scout existing agents before building from scratch).
+triggers:
+  - "create a feishu agent"
+  - "deploy a feishu bot"
+  - "register feishu agent"
+  - "add a new feishu bot"
+  - "onboard a feishu agent"
+  - "find an agent for"
+  - "飞书机器人"
+  - "飞书 agent"
+  - "feishu agent"
+  - "feishu bot"
+channel: feishu
+status: ready
+inputs:
+  - feishu_app_id        # From https://open.feishu.cn/app
+  - feishu_app_secret    # Keep secure, never log
+  - agent_id             # Unique identifier
+  - display_name         # Human-readable name
+  - workspace_path       # Absolute path
+  - default_model        # e.g., minimax/auto, kimi/kimi-code
+  - target_chat          # Group or individual chat for binding
+outputs:
+  - agent_workspace      # Full workspace with templates
+  - openclaw_config      # JSON config entries
+  - feishu_app           # Configured Feishu app with bot enabled
+  - paired_bot          # Approved and ready to chat
+dependencies:
+  - agent-onboarding     # Uses generic onboarding as base
+templates:
+  - references/workspace-templates.md  # IDENTITY.md, SOUL.md, etc.
+key_urls:
+  feishu_open_platform: "https://open.feishu.cn/app"
+  feishu_app_launcher: "https://open.feishu.cn/page/launcher"
 ---
 
 # Feishu Agent Creator Skill

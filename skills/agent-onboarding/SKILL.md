@@ -1,6 +1,33 @@
 ---
 name: agent-onboarding
-description: Onboard a new OpenClaw agent into the system. Use when creating, registering, or deploying a new agent with its own workspace, channel account (Feishu/Discord/etc.), and configuration. Covers the full lifecycle from collecting credentials to pairing approval. Triggers on phrases like "create a new agent", "onboard an agent", "deploy a bot", "register agent", "add a new agent".
+description: |
+  Onboard a new OpenClaw agent into the system. Use when creating, registering, 
+  or deploying a new agent with its own workspace, channel account, and configuration. 
+  Covers the full lifecycle from collecting credentials to pairing approval.
+triggers:
+  - "create a new agent"
+  - "onboard an agent"
+  - "deploy a bot"
+  - "register agent"
+  - "add a new agent"
+  - "new agent setup"
+  - "agent deployment"
+channel: any  # Works with Feishu, Discord, WeCom, WhatsApp, Telegram
+status: ready
+inputs:
+  - channel_credentials  # App ID/Secret, Bot Token, etc.
+  - agent_id             # Unique identifier
+  - display_name         # Human-readable name
+  - workspace_path       # Absolute path
+  - default_model        # e.g., minimax/auto, kimi/kimi-code
+  - channel_binding      # Which chat/group
+outputs:
+  - agent_workspace      # Directory with IDENTITY.md, SOUL.md, etc.
+  - openclaw_config      # agents.list, channels, bindings entries
+  - paired_bot          # Ready-to-use channel bot
+dependencies: []  # No external skill dependencies
+templates:
+  - references/workspace-templates.md  # IDENTITY.md, SOUL.md, etc.
 ---
 
 # Agent Onboarding Skill

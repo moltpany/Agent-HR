@@ -1,0 +1,133 @@
+{
+  "repository": "Agent-HR",
+  "description": "OpenClaw agent recruitment and onboarding framework",
+  "version": "1.0.0",
+  "target_platform": "OpenClaw",
+  "skills": [
+    {
+      "id": "agent-onboarding",
+      "name": "Generic Agent Onboarding",
+      "description": "7-step channel-agnostic agent deployment pipeline",
+      "status": "ready",
+      "channel": "any",
+      "channels_supported": ["feishu", "discord", "wecom", "whatsapp", "telegram"],
+      "triggers": [
+        "create agent",
+        "onboard agent",
+        "deploy bot",
+        "new agent",
+        "agent setup",
+        "onboard bot",
+        "register agent",
+        "add new agent"
+      ],
+      "file": "skills/agent-onboarding/SKILL.md",
+      "templates": [
+        "skills/agent-onboarding/references/workspace-templates.md"
+      ],
+      "dependencies": [],
+      "outputs": [
+        "IDENTITY.md",
+        "SOUL.md", 
+        "USER.md",
+        "AGENTS.md",
+        "TOOLS.md",
+        "HEARTBEAT.md"
+      ]
+    },
+    {
+      "id": "feishu-agent-creator",
+      "name": "Feishu Agent Creator",
+      "description": "Complete Feishu-specific agent creation with expectation interview and talent search",
+      "status": "ready",
+      "channel": "feishu",
+      "channels_supported": ["feishu"],
+      "triggers": [
+        "create feishu agent",
+        "feishu bot",
+        "飞书机器人",
+        "飞书 agent",
+        "feishu agent",
+        "deploy feishu bot",
+        "飞书 bot"
+      ],
+      "file": "skills/feishu-agent-creator/SKILL.md",
+      "templates": [
+        "skills/feishu-agent-creator/references/workspace-templates.md"
+      ],
+      "dependencies": ["agent-onboarding"],
+      "outputs": [
+        "OpenClaw config (agents.list, channels, bindings)",
+        "Agent workspace directory",
+        "Feishu bot account"
+      ],
+      "key_urls": {
+        "feishu_open_platform": "https://open.feishu.cn/app"
+      }
+    }
+  ],
+  "templates": {
+    "workspace_files": [
+      {
+        "file": "IDENTITY.md",
+        "purpose": "Agent name, creature, vibe, emoji, avatar",
+        "fields": ["Name", "Creature", "Vibe", "Emoji", "Avatar"]
+      },
+      {
+        "file": "SOUL.md",
+        "purpose": "Personality, boundaries, behavior guidelines",
+        "fields": ["Core Truths", "Boundaries", "Vibe"]
+      },
+      {
+        "file": "USER.md",
+        "purpose": "Who the agent serves, context to remember",
+        "fields": ["Name", "What to call them", "Timezone", "Context"]
+      },
+      {
+        "file": "AGENTS.md",
+        "purpose": "Workspace rules, workflows, job description",
+        "fields": ["First Run", "Session Startup", "Memory", "Red Lines", "External vs Internal", "Group Chats", "Tools", "Heartbeats"]
+      },
+      {
+        "file": "TOOLS.md",
+        "purpose": "Local setup, skill preferences, environment config",
+        "fields": ["Cameras", "SSH hosts", "TTS preferences", "Skill mapping"]
+      },
+      {
+        "file": "HEARTBEAT.md",
+        "purpose": "Periodic checks the agent should run",
+        "fields": ["Email check", "Calendar check", "Weather check", "Memory maintenance"]
+      }
+    ]
+  },
+  "agent_types_supported": [
+    "chat-bot",
+    "task-automation",
+    "scheduled-cron",
+    "monitoring",
+    "content-creation",
+    "data-analysis",
+    "hr-recruitment",
+    "customer-service"
+  ],
+  "discovery_keywords": [
+    "agent-management",
+    "agent-onboarding",
+    "openclaw",
+    "feishu-bot",
+    "discord-bot",
+    "wecom-bot",
+    "ai-agent-recruitment",
+    "agent-workspace",
+    "agent-templates",
+    "agent-identity",
+    "agent-personality",
+    "agent-deployment",
+    "multi-agent-team",
+    "hr-agent",
+    "agent-framework",
+    "agent-lifecycle",
+    "talent-scout",
+    "clawhub"
+  ]
+}
