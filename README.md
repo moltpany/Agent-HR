@@ -50,6 +50,7 @@ Before building a new agent, search the global agent marketplace:
 | Module | Status | Description |
 |--------|--------|-------------|
 | `user-expectation-guide` | ✅ Ready | Interview users to articulate agent vision before searching/building |
+| `agent-onboarding` | ✅ Ready | Generic agent onboarding pipeline (channel-agnostic) |
 | `feishu-agent-creator` | ✅ Ready | Full agent onboarding pipeline for Feishu bots |
 | `agent_search` | ✅ Ready | Search GitHub/ClawHub/internal before building |
 | `agent_evaluate` | 📝 TODO | Score agent quality, match to requirements |
@@ -66,8 +67,9 @@ Before building a new agent, search the global agent marketplace:
 ### Deploy the HR Agent
 
 ```bash
-# 1. Install the skill
+# 1. Install skills
 cp -r skills/feishu-agent-creator ~/.openclaw/workspace-hr/skills/
+cp -r skills/agent-onboarding ~/.openclaw/workspace-hr/skills/
 
 # 2. Configure OpenClaw
 openclaw agents add "HR 🍊" \
@@ -115,6 +117,7 @@ HR Agent will:
 
 ### Phase 1: Foundation ✅
 - [x] `user-expectation-guide` — Interview framework to articulate agent vision
+- [x] `agent-onboarding` — Generic agent onboarding (channel-agnostic)
 - [x] `feishu-agent-creator` — Full onboarding pipeline
 - [x] `agent_search` — GitHub + ClawHub + internal roster search
 - [x] Workspace templates — IDENTITY.md, SOUL.md, AGENTS.md, TOOLS.md
@@ -180,11 +183,15 @@ HR Agent will:
 ## 🛠️ Skill Structure
 
 ```
-skills/feishu-agent-creator/
-├── SKILL.md                          ← Main skill file
-├── references/
-│   └── workspace-templates.md        ← IDENTITY.md, SOUL.md templates
-└── README.md                         ← This file (framework overview)
+skills/
+├── feishu-agent-creator/
+│   ├── SKILL.md                          ← Feishu-specific onboarding
+│   └── references/
+│       └── workspace-templates.md        ← IDENTITY.md, SOUL.md templates
+└── agent-onboarding/
+    ├── SKILL.md                          ← Generic onboarding (any channel)
+    └── references/
+        └── workspace-templates.md        ← Same templates, channel-agnostic
 ```
 
 ---
@@ -204,7 +211,7 @@ This framework is designed to be extended. To add a new HR capability:
 
 - Inspired by [agency-agents](https://github.com/msitarzewski/agency-agents) by @msitarzewski
 - Built for [OpenClaw](https://github.com/openclaw/openclaw)
-- HR Agent persona designed by @ou_441ba2d680520a31eae6227b561df669 🍊🦞
+- HR Agent persona designed by a team of human-AI collaborators 🍊🦞
 
 ---
 
