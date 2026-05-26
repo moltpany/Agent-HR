@@ -28,7 +28,7 @@
       "dependencies": [],
       "outputs": [
         "IDENTITY.md",
-        "SOUL.md", 
+        "SOUL.md",
         "USER.md",
         "AGENTS.md",
         "TOOLS.md",
@@ -53,16 +53,22 @@
       ],
       "file": "skills/feishu-agent-creator/SKILL.md",
       "templates": [
-        "skills/feishu-agent-creator/references/workspace-templates.md"
+        "skills/feishu-agent-creator/references/workspace-templates.md",
+        "skills/feishu-agent-creator/references/feishu-permissions.md"
       ],
       "dependencies": ["agent-onboarding"],
       "outputs": [
+        "IDENTITY.md",
+        "SOUL.md",
+        "USER.md",
+        "AGENTS.md",
+        "TOOLS.md",
+        "HEARTBEAT.md",
         "OpenClaw config (agents.list, channels, bindings)",
-        "Agent workspace directory",
         "Feishu bot account"
       ],
       "key_urls": {
-        "feishu_open_platform": "https://open.feishu.cn/app"
+        "feishu_open_platform": "https://open.feishu.cn/page/launcher"
       }
     }
   ],

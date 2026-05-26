@@ -19,7 +19,7 @@ triggers:
 channel: feishu
 status: ready
 inputs:
-  - feishu_app_id        # From https://open.feishu.cn/app
+  - feishu_app_id        # From https://open.feishu.cn/page/launcher
   - feishu_app_secret    # Keep secure, never log
   - agent_id             # Unique identifier
   - display_name         # Human-readable name
@@ -27,22 +27,21 @@ inputs:
   - default_model        # e.g., minimax/auto, kimi/kimi-code
   - target_chat          # Group or individual chat for binding
 outputs:
-  - agent_workspace      # Full workspace with templates
-  - openclaw_config      # JSON config entries
+  - agent_workspace      # Full workspace with IDENTITY.md, SOUL.md, USER.md, AGENTS.md, TOOLS.md, HEARTBEAT.md
+  - openclaw_config      # JSON config entries (agents.list, channels, bindings)
   - feishu_app           # Configured Feishu app with bot enabled
-  - paired_bot          # Approved and ready to chat
+  - paired_bot           # Approved and ready to chat
 dependencies:
   - agent-onboarding     # Uses generic onboarding as base
 templates:
   - references/workspace-templates.md  # IDENTITY.md, SOUL.md, etc.
 key_urls:
-  feishu_open_platform: "https://open.feishu.cn/app"
-  feishu_app_launcher: "https://open.feishu.cn/page/launcher"
+  feishu_open_platform: "https://open.feishu.cn/page/launcher"
 ---
 
 # Feishu Agent Creator Skill
 
-Guide for bringing a new agent into an OpenClaw deployment.
+Guide for bringing a new Feishu agent into an OpenClaw deployment.
 
 ## Workflow Overview
 
@@ -64,17 +63,18 @@ Before building from scratch, scout the global agent marketplace:
 4. **Assess Match** — Determine: reuse / adapt / build-new
 
 ### Phase 2: Onboarding
-5. **Collect Application Info** — Gather credentials and preferences from the sponsor
-6. **Register in Config** — Add the agent to OpenClaw's configuration files
-7. **Create Workspace** — Set up the agent's working directory with core files
-8. **Equip Skills** — Assign relevant skills based on the agent's job
-9. **Restart Gateway** — Reload the system to recognize the new agent
-10. **Pair & Approve** — Complete channel pairing and approve the connection
-11. **First Day** — Agent introduces itself and begins work
+5. **Configure Feishu App** — Create the Feishu app and obtain credentials
+6. **Collect Application Info** — Confirm credentials and preferences with the sponsor
+7. **Register in Config** — Add the agent to OpenClaw's configuration files
+8. **Create Workspace** — Set up the agent's working directory with core files
+9. **Equip Skills** — Assign relevant skills based on the agent's job
+10. **Restart Gateway** — Reload the system to recognize the new agent
+11. **Pair & Approve** — Complete channel pairing and approve the connection
+12. **First Day** — Agent introduces itself and begins work
 
 ## Step-by-Step
 
-### 0. Understand User Expectations (CRITICAL — Do This First)
+### Phase 0: Understand User Expectations (CRITICAL — Do This First)
 
 Before searching GitHub or writing any code, you MUST understand what the user actually wants. Ask guiding questions:
 
@@ -83,7 +83,7 @@ Before searching GitHub or writing any code, you MUST understand what the user a
 Ask the user to describe their ideal agent:
 
 | Question | Why It Matters | Example Answers |
-|----------|---------------|-----------------|
+|----------|---------------|------------------|
 | **"这个 agent 主要负责什么工作？"** | Determines core skills | "帮我记录拍鸟照片" / "管理项目进度" / "回答客服问题" |
 | **"你希望它是什么性格？"** | Guides personality design | "温暖亲切" / "毒舌吐槽" / "严谨专业" / "幽默风趣" |
 | **"有没有喜欢的角色/形象作为参考？"** | Inspiration for identity | "像钢铁侠那样靠谱" / "像哆啦A梦" / "像一位老教授" |
@@ -124,11 +124,11 @@ Now that you know what the user wants, search with specific keywords:
 
 ---
 
-### 1. Agent Search & Talent Discovery (Optional but Recommended)
+### Phase 1: Agent Search & Talent Discovery (Optional but Recommended)
 
 Before creating a new agent from scratch, search for existing agent templates, skills, and implementations that might already solve the problem. This avoids reinventing the wheel and leverages battle-tested agent personalities.
 
-#### 0.1 Search GitHub Agent Repositories
+#### 1.1 Search GitHub Agent Repositories
 
 Primary target: [msitarzewski/agency-agents](https://github.com/msitarzewski/agency-agents)
 - Contains 100+ specialized agent personalities across Engineering, Design, Marketing, Sales, Product, etc.
@@ -146,7 +146,7 @@ Match criteria:
 - **Partial match** → Agent covers related domain, can be adapted
 - **No match** → Build from scratch using workspace templates
 
-#### 0.2 Search ClawHub Skills Registry
+#### 1.2 Search ClawHub Skills Registry
 
 Check if OpenClaw skills already exist for the agent's intended domain:
 ```bash
@@ -159,7 +159,7 @@ Relevant skill categories:
 - `weather`, `web-fetch`, `healthcheck` — General utilities
 - Custom skills in `~/.openclaw/workspace-*/skills/`
 
-#### 0.3 Check Internal Agent Roster
+#### 1.3 Check Internal Agent Roster
 
 Query existing agents to avoid duplication:
 ```bash
@@ -171,7 +171,7 @@ Check:
 - Can the existing agent be extended with new skills instead?
 - Should the new agent be a specialization of an existing one?
 
-#### 0.4 Talent Assessment Matrix
+#### 1.4 Talent Assessment Matrix
 
 After searching, present a recommendation:
 
@@ -181,7 +181,7 @@ After searching, present a recommendation:
 | **Adapt** | Partial match — domain overlaps but needs customization | Merge multiple agent personalities, add custom skills |
 | **Build New** | No match found or highly specialized requirement | Use workspace-templates.md, craft custom identity |
 
-#### 0.5 Translation from Template to OpenClaw
+#### 1.5 Translation from Template to OpenClaw
 
 If reusing from agency-agents or similar template repos:
 
@@ -195,10 +195,27 @@ If reusing from agency-agents or similar template repos:
 
 ---
 
-### 1. Collect Application Info
+### Phase 2: Onboarding
 
-Get these from the human sponsor:
-- **Channel credentials**: App ID & App Secret (Feishu), Bot Token (Discord), etc.
+### Step 1: Configure Feishu App
+
+Create and configure the Feishu app first — you need the App ID and Secret before registering in OpenClaw.
+
+1. Go to **Feishu Open Platform**: https://open.feishu.cn/page/launcher
+2. Click **Create App** → **Custom App**
+3. Note down the **App ID** and **App Secret**
+
+Then configure the app:
+1. **Event Subscription** → Select "Use long connection to receive events" → Add event `im.message.receive_v1`
+2. **Permission Management** → Import required permissions (see [references/feishu-permissions.md](references/feishu-permissions.md))
+3. **App Capability > Bot** → Enable bot capability
+4. **Version Management & Release** → Create version → Submit for release
+
+### Step 2: Collect Application Info
+
+With Feishu credentials in hand, confirm all required inputs with the sponsor:
+
+- **Feishu App ID & App Secret**: From Step 1 above
 - **Agent ID**: Unique identifier, e.g. `hr-agent`, `finance-bot`
 - **Display Name**: Human-readable name
 - **Workspace path**: Where files live, e.g. `/workspace-hr`
@@ -207,7 +224,7 @@ Get these from the human sponsor:
 
 ⚠️ **Security**: Never log or share App Secrets in chat. Store only in secure config.
 
-### 2. Register in OpenClaw Config
+### Step 3: Register in OpenClaw Config
 
 **Method A: Using CLI (recommended)**
 
@@ -270,7 +287,7 @@ Validate config after changes:
 openclaw config validate
 ```
 
-### 3. Create Workspace
+### Step 4: Create Workspace
 
 ```bash
 mkdir -p <workspace-path>
@@ -278,15 +295,14 @@ mkdir -p <workspace-path>
 
 Then create core workspace files. For detailed templates, see [references/workspace-templates.md](references/workspace-templates.md).
 
-### 4. Equip Skills
+### Step 5: Equip Skills
 
 Copy relevant skills to `<workspace-path>/skills/`:
 - **Feishu**: calendar, task, docs, sheets, bitable, IM
-- **Enterprise WeChat**: contact, schedule, docs, smartsheet, msg
 - **General**: weather, web-fetch, healthcheck, clawhub
 - **Custom**: Write a `SKILL.md` + scripts if needed
 
-### 5. Restart Gateway
+### Step 6: Restart Gateway
 
 ```bash
 openclaw gateway restart
@@ -297,20 +313,7 @@ Or check status first:
 openclaw gateway status
 ```
 
-### 6. Configure Feishu App (required for Feishu bots)
-
-First, create a Feishu app:
-1. Go to **Feishu Open Platform**: https://open.feishu.cn/page/launcher?user_openid=...
-2. Click **Create App** → **Custom App**
-3. Note down the **App ID** and **App Secret**
-
-Then configure the app:
-1. **Event Subscription** → Select "Use long connection to receive events" → Add event `im.message.receive_v1`
-2. **Permission Management** → Import required permissions (see feishu-permissions.md)
-3. **App Capability > Bot** → Enable bot capability
-4. **Version Management & Release** → Create version → Submit for release
-
-### 7. Pair & Approve
+### Step 7: Pair & Approve
 
 1. Human sends a message to the bot in the target chat
 2. This triggers a **pairing request** with a code like `PAIR-XXXXXX`
@@ -320,7 +323,7 @@ openclaw pairing approve feishu <PAIR-CODE>
 ```
 4. Agent can now receive and send messages
 
-### 8. First Day Onboarding
+### Step 8: First Day Onboarding
 
 - Agent wakes up and reads its workspace files
 - Introduces itself in the relevant group chat
@@ -357,4 +360,4 @@ This roster enables:
 - **Messages not routing**: Check `bindings` config matches chat/account IDs
 - **Agent search finds template but deployment fails**: Templates often need translation from their native format (Claude Code prompts → OpenClaw workspace)
 
-For the complete original onboarding example that inspired this skill, see [references/workspace-templates.md](references/workspace-templates.md).
+For workspace file templates, see [references/workspace-templates.md](references/workspace-templates.md).
