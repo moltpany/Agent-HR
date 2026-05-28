@@ -94,6 +94,7 @@ See `agent-registry.json` for structured skill metadata.
 |--------|--------|-------------|
 | `agent-onboarding` | ✅ Ready | Generic deployment pipeline |
 | `feishu-agent-creator` | ✅ Ready | Feishu-specific creation flow (includes expectation interview and talent search) |
+| `agent-publish` | ✅ Ready | Distill and publish agent to GitHub |
 | `agent_evaluate` | 📝 TODO | Automated agent quality scoring |
 | `multi_channel_deploy` | 📝 TODO | Discord, WeCom, WhatsApp support |
 

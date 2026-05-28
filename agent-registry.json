@@ -36,6 +36,33 @@
       ]
     },
     {
+      "id": "agent-publish",
+      "name": "Agent Publish (Distill)",
+      "description": "Publish (distill) an OpenClaw agent to a public GitHub repository. Strips private memory, de-identifies personal info, generates workspace templates, and pushes a clean, reusable framework.",
+      "status": "ready",
+      "channel": "any",
+      "channels_supported": ["feishu", "discord", "wecom", "whatsapp", "telegram"],
+      "triggers": [
+        "publish agent",
+        "distill agent",
+        "package agent",
+        "发布 agent",
+        "打包 agent",
+        "extract agent framework",
+        "把 agent 开源"
+      ],
+      "file": "skills/agent-publish/SKILL.md",
+      "templates": [],
+      "dependencies": [],
+      "outputs": [
+        "GitHub repository URL",
+        "README.md",
+        "LICENSE",
+        ".gitignore",
+        "references/*.md.template"
+      ]
+    },
+    {
       "id": "feishu-agent-creator",
       "name": "Feishu Agent Creator",
       "description": "Complete Feishu-specific agent creation with expectation interview and talent search",
