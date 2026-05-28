@@ -58,17 +58,20 @@ openclaw gateway restart
 
 ```
 .
-├── README.md                 # This file — optimized for both humans and AI
+├── README.md                 # This file
 ├── agent-registry.json       # Machine-readable skill catalog
 ├── skills/
 │   ├── agent-onboarding/     # Generic deployment pipeline
+│   │   ├── README.md
 │   │   ├── SKILL.md
 │   │   └── references/
-│   │       └── workspace-templates.md  # IDENTITY.md, SOUL.md, etc.
+│   │       └── workspace-templates.md
 │   └── feishu-agent-creator/ # Feishu-specific creation flow
+│       ├── README.md
 │       ├── SKILL.md
 │       └── references/
-│           └── workspace-templates.md
+│           ├── workspace-templates.md
+│           └── feishu-permissions.md
 └── LICENSE
 ```
 
@@ -81,7 +84,7 @@ openclaw gateway restart
 
 **Key capabilities:**
 - `agent-onboarding` — Channel-agnostic agent deployment with workspace templates
-- `feishu-agent-creator` — Feishu-specific flow including user expectation interview
+- `feishu-agent-creator` — Feishu-specific flow including user expectation interview and talent search
 
 See `agent-registry.json` for structured skill metadata.
 
@@ -89,10 +92,8 @@ See `agent-registry.json` for structured skill metadata.
 
 | Module | Status | Description |
 |--------|--------|-------------|
-| `user-expectation-guide` | ✅ Ready | Interview framework before building |
 | `agent-onboarding` | ✅ Ready | Generic deployment pipeline |
-| `feishu-agent-creator` | ✅ Ready | Feishu-specific creation flow |
-| `agent_search` | ✅ Ready | GitHub/ClawHub/internal talent search |
+| `feishu-agent-creator` | ✅ Ready | Feishu-specific creation flow (includes expectation interview and talent search) |
 | `agent_evaluate` | 📝 TODO | Automated agent quality scoring |
 | `multi_channel_deploy` | 📝 TODO | Discord, WeCom, WhatsApp support |
 
