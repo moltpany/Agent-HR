@@ -154,6 +154,28 @@ If exists:
 3. Merge if valuable: `git merge origin/claude/<branch> --ff-only`
 4. Push updated main
 
+### Phase 6: Quality Gate (Optional) 🧪
+
+Before finalizing the release, run `agent-evals` on the distilled agent:
+
+```bash
+# Evaluate against three-pillar rubric
+# See skills/agent-evals/SKILL.md for full procedure
+```
+
+1. **Run fixture tasks** (3–5 scenarios) end-to-end
+2. **Score three pillars**:
+   - skill chain (0.35) — Can skills actually execute?
+   - knowledge (0.35) — Are sources traceable and uncertain claims bounded?
+   - portability (0.30) — Can it run under a different model or host?
+3. **Verdict**:
+   - `pass` (all pillars ≥ 4.0, total ≥ 4.0) → proceed to finalize
+   - `conditional` (total ≥ 3.5, one pillar < 4.0) → warn user, ask "push anyway?"
+   - `fail` (total < 3.5 or any pillar < 2.0) → block, show remediation plan
+4. **Publish eval trace** to `evals/<agent>-<version>.md` (if in Moltpany cohort)
+
+**Principle**: Honest low score > padded high score. If Agent-HR itself gets L1 on portability, it gets L1 with a plan.
+
 ## Post-Publish Checklist
 
 - [ ] All skills copied verbatim into `skills/`

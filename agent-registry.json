@@ -63,6 +63,33 @@
       ]
     },
     {
+      "id": "agent-evals",
+      "name": "Agent Evaluation (Molt Review)",
+      "description": "Evaluate an OpenClaw agent against a structured three-pillar rubric before release (molt). Pillars: skill-chain executability, knowledge trustworthiness, cross-model portability. Each scored 0-5. Produces trace, score report, and remediation plan.",
+      "status": "ready",
+      "channel": "any",
+      "channels_supported": ["feishu", "discord", "wecom", "whatsapp", "telegram"],
+      "triggers": [
+        "eval agent",
+        "评测 agent",
+        "质量评测",
+        "review agent",
+        "molt review",
+        "给 agent 打分",
+        "agent 评测"
+      ],
+      "file": "skills/agent-evals/SKILL.md",
+      "templates": [
+        "skills/agent-evals/references/rubric.md"
+      ],
+      "dependencies": [],
+      "outputs": [
+        "eval trace",
+        "score report (JSON)",
+        "remediation plan"
+      ]
+    },
+    {
       "id": "feishu-agent-creator",
       "name": "Feishu Agent Creator",
       "description": "Complete Feishu-specific agent creation with expectation interview and talent search",

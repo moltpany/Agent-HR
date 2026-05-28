@@ -19,6 +19,8 @@ Agent-HR is a framework for **managing AI agents as team members** inside [OpenC
 |-------|---------|--------|-------------|
 | `agent-onboarding` | Any | ✅ Ready | Generic 7-step agent deployment (Feishu, Discord, WeCom, etc.) |
 | `feishu-agent-creator` | Feishu | ✅ Ready | Complete Feishu bot creation with expectation interview + talent search |
+| `agent-publish` | Any | ✅ Ready | Distill and publish an agent to a public GitHub repo |
+| `agent-evals` | Any | ✅ Ready | Evaluate agent quality before release (skill chain / knowledge / portability) |
 
 ## Why Agent-HR?
 
@@ -44,6 +46,8 @@ Before building a new agent, search the global agent marketplace:
 # Install skills
 cp -r skills/agent-onboarding ~/.openclaw/workspace-hr/skills/
 cp -r skills/feishu-agent-creator ~/.openclaw/workspace-hr/skills/
+cp -r skills/agent-publish ~/.openclaw/workspace-hr/skills/
+cp -r skills/agent-evals ~/.openclaw/workspace-hr/skills/
 
 # Deploy HR Agent
 openclaw agents add "HR 🍊" \
@@ -66,12 +70,18 @@ openclaw gateway restart
 │   │   ├── SKILL.md
 │   │   └── references/
 │   │       └── workspace-templates.md
-│   └── feishu-agent-creator/ # Feishu-specific creation flow
-│       ├── README.md
+│   ├── feishu-agent-creator/ # Feishu-specific creation flow
+│   │   ├── README.md
+│   │   ├── SKILL.md
+│   │   └── references/
+│   │       ├── workspace-templates.md
+│   │       └── feishu-permissions.md
+│   ├── agent-publish/        # Publish agent to GitHub
+│   │   └── SKILL.md
+│   └── agent-evals/          # Quality evaluation before release
 │       ├── SKILL.md
 │       └── references/
-│           ├── workspace-templates.md
-│           └── feishu-permissions.md
+│           └── rubric.md
 └── LICENSE
 ```
 
@@ -85,6 +95,8 @@ openclaw gateway restart
 **Key capabilities:**
 - `agent-onboarding` — Channel-agnostic agent deployment with workspace templates
 - `feishu-agent-creator` — Feishu-specific flow including user expectation interview and talent search
+- `agent-publish` — Distill an agent (strip memory, templatize, push to GitHub)
+- `agent-evals` — Evaluate agent quality before release (three-pillar rubric)
 
 See `agent-registry.json` for structured skill metadata.
 
@@ -95,7 +107,7 @@ See `agent-registry.json` for structured skill metadata.
 | `agent-onboarding` | ✅ Ready | Generic deployment pipeline |
 | `feishu-agent-creator` | ✅ Ready | Feishu-specific creation flow (includes expectation interview and talent search) |
 | `agent-publish` | ✅ Ready | Distill and publish agent to GitHub |
-| `agent_evaluate` | 📝 TODO | Automated agent quality scoring |
+| `agent-evals` | ✅ Ready | Three-pillar quality evaluation (skill chain / knowledge / portability) |
 | `multi_channel_deploy` | 📝 TODO | Discord, WeCom, WhatsApp support |
 
 ## Contributing
