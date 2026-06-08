@@ -20,7 +20,7 @@ Agent-HR is a framework for **managing AI agents as team members** inside [OpenC
 | `agent-onboarding` | Any | ✅ Ready | Generic 7-step agent deployment (Feishu, Discord, WeCom, etc.) |
 | `feishu-agent-creator` | Feishu | ✅ Ready | Complete Feishu bot creation with expectation interview + talent search |
 | `agent-publish` | Any | ✅ Ready | Distill and publish an agent to a public GitHub repo |
-| `agent-evals` | Any | ✅ Ready | Evaluate agent quality before release (skill chain / knowledge / portability) |
+| `agent-evals` | Any | ✅ Ready | Evaluate agent quality before release (outcome / skill chain / knowledge / safety / portability) |
 
 ## Why Agent-HR?
 
@@ -96,7 +96,7 @@ openclaw gateway restart
 - `agent-onboarding` — Channel-agnostic agent deployment with workspace templates
 - `feishu-agent-creator` — Feishu-specific flow including user expectation interview and talent search
 - `agent-publish` — Distill an agent (strip memory, templatize, push to GitHub)
-- `agent-evals` — Evaluate agent quality before release (three-pillar rubric)
+- `agent-evals` — Evaluate agent quality before release (five-pillar rubric: outcome / skill chain / knowledge / safety / portability)
 
 See `agent-registry.json` for structured skill metadata.
 
@@ -107,7 +107,7 @@ See `agent-registry.json` for structured skill metadata.
 | `agent-onboarding` | ✅ Ready | Generic deployment pipeline |
 | `feishu-agent-creator` | ✅ Ready | Feishu-specific creation flow (includes expectation interview and talent search) |
 | `agent-publish` | ✅ Ready | Distill and publish agent to GitHub |
-| `agent-evals` | ✅ Ready | Three-pillar quality evaluation (skill chain / knowledge / portability) |
+| `agent-evals` | ✅ Ready | Five-pillar quality evaluation (outcome / skill chain / knowledge / safety / portability) |
 | `multi_channel_deploy` | 📝 TODO | Discord, WeCom, WhatsApp support |
 
 ## Contributing

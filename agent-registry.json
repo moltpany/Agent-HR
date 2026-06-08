@@ -65,7 +65,7 @@
     {
       "id": "agent-evals",
       "name": "Agent Evaluation (Molt Review)",
-      "description": "Evaluate an OpenClaw agent against a structured three-pillar rubric before release (molt). Pillars: skill-chain executability, knowledge trustworthiness, cross-model portability. Each scored 0-5. Produces trace, score report, and remediation plan.",
+      "description": "Evaluate an OpenClaw agent against a structured five-pillar rubric (v0.2) before release (molt). Pillars: outcome quality, skill-chain executability, knowledge trustworthiness, safety / boundaries, cross-model portability. Each scored 0-5. Produces trace, score report, and remediation plan.",
       "status": "ready",
       "channel": "any",
       "channels_supported": ["feishu", "discord", "wecom", "whatsapp", "telegram"],
